@@ -4,13 +4,14 @@ stage 'checkout'
 git 'https://github.com/vinaykurakula07/DevOps-Training.git'
 
 stage 'compile'
-sh 'mvn compile'
+  def mvnHome = tool name: 'maven', type: 'maven'
+  sh "${mvnHome}/bin/mvn compile"
 
 stage 'test'
-sh 'mvn test'
+sh "${mvnHome}/bin/mvn test"
 
 stage 'package'
-sh 'mvn package'
+sh "${mvnHome}/bin/mvn package"
 
 stage 'artifacts'
 archiveArtifacts 'target/*.war'
